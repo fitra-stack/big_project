@@ -8,7 +8,8 @@ module.exports = {
         id: {
           type: Sequelize.UUID,
           default: Sequelize.UUIDV4,
-          primaryKey: true
+          primaryKey: true,
+          allowNull: false
         },
         color: {
           type: Sequelize.STRING(50)

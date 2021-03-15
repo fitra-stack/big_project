@@ -8,13 +8,14 @@ module.exports = {
         id: {
           type: Sequelize.UUID,
           default: Sequelize.UUIDV4,
-          primaryKey: true
+          primaryKey: true,
+          allowNull: false
         },
         status: {
           type: Sequelize.STRING(50)
         },
         total_payment: {
-          type: Sequelize.INT
+          type: Sequelize.DOUBLE
         },
         user_id: {
           type: Sequelize.UUID,

@@ -8,26 +8,27 @@ module.exports = {
         id: {
           type: Sequelize.UUID,
           default: Sequelize.UUIDV4,
-          primaryKey: true
+          primaryKey: true,
+          allowNull: false
         },
         name: {
           type: Sequelize.STRING(50),
           allowNull: false
         },
         description: {
-          type: Sequelize.STRING
+          type: Sequelize.TEXT,
         },
         stock: {
-          type: Sequelize.INT
+          type: Sequelize.INTEGER
         },
         discount: {
-          type: Sequelize.INT
+          type: Sequelize.INTEGER
         },
         sex: {
           type: Sequelize.STRING
         },
         price: {
-          type: Sequelize.INT
+          type: Sequelize.DOUBLE
         },
         user_id: {
           type: Sequelize.UUID,
