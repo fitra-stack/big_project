@@ -5,12 +5,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faMinus } from '@fortawesome/free-solid-svg-icons';
-import  { useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { loremIpsum } from 'react-lorem-ipsum';
 import { connect } from 'react-redux';
 import productReducer from '../reducers/productReducer';
 import { Link } from 'react-router-dom';
 import productLists from './data'
+import { getProduct } from '../reducers/action';
 
 // baris comment dibawah uda gak kepake karena uda pake reducer products, jadi uda gak local dari hal Infinity, ini dipake kalo local, nyambung di setProducts line 34
 // const productLists = [{
@@ -30,6 +31,9 @@ import productLists from './data'
 //     productPrice : 22,
 
 // }]
+
+
+
 const Product = ({ products, count, slide , basket, addItem, minItem, slideItem, slideItem2, basketItem }) => {
     // baris dibawah ini uda gak kepake soalnya uda ambil dari productReducer, cek products di mapStateToProps atau di param baris atas ini
     // const [products, setProducts] = useState(productLists);
@@ -41,8 +45,14 @@ const Product = ({ products, count, slide , basket, addItem, minItem, slideItem,
     const allQty = items.map(qty => qty.quantity)
     const totalQty = allQty.reduce(function(acc, val) { return acc + val; }, 0)
     console.log(totalQty,"tototototo")
+
+const { history } = useRouter()
+
+    useEffect(() => {
+        getProducts()
+    },[getProducts])
     
-    return(
+    return products && products.length > 0 ? (
         <div>
             <div className="container-full-product">
                 <br/>

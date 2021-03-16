@@ -21,3 +21,99 @@ export const getProduct = () => {
       ]
     }
   }
+
+export const getProducts = () => {
+    const request = axios.get('http://localhost:8000/products')
+
+    return (dispatch) => 
+      request.then(response =>
+        dispatch({
+          type: 'GET_PRODUCTS',
+          payload: response.data.data
+        })
+      )
+  }
+
+export const getProductsById = (id) => {
+    const request = axios.get('http://localhost:8000/products/${id}')
+
+    return (dispatch) => 
+      request.then(response =>
+        dispatch({
+          type: 'GET_PRODUCTS_BY_ID',
+          payload: response.data.data
+        })
+      )
+  }
+
+export const getProductsById = (id) => {
+    const request = axios.get('http://localhost:8000/products/${id}')
+
+    return (dispatch) => 
+      request.then(response =>
+        dispatch({
+          type: 'GET_PRODUCTS_BY_ID',
+          payload: response.data.data
+        })
+      )
+  }
+
+export const addProducts = (products) => {
+    const request = axios.post('http://localhost:8000/products', products,{
+      headers:{
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+
+    return (dispatch) => 
+      request.then(response =>
+        dispatch({
+          type: 'ADD_PRODUCTS',
+          payload: response.data.data
+        })
+      ).catch(error => {
+        alert('you must re-login')
+        localStorage.removeItem('isLogin')
+        localStorage.removeItem('token')
+      })
+  }
+
+export const updateProducts = (products) => {
+    const request = axios.patch('http://localhost:8000/products', products,{
+      headers:{
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+
+    return (dispatch) => 
+      request.then(response =>
+        dispatch({
+          type: 'UPDATE_PRODUCTS',
+          payload: response.data.data
+        })
+      ).catch(error => {
+        alert('you must re-login')
+        localStorage.removeItem('isLogin')
+        localStorage.removeItem('token')
+      })
+  }
+
+  export const deleteProducts = (id) => {
+    const request = axios.post('http://localhost:8000/products/${id}',{
+      headers:{
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+
+    return (dispatch) => 
+      request.then(response =>
+        dispatch({
+          type: 'DELETE_PRODUCTS',
+          payload: {id}
+        })
+      ).catch(error => {
+        alert('you must re-login')
+        localStorage.removeItem('isLogin')
+        localStorage.removeItem('token')
+      })
+  }
